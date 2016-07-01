@@ -111,6 +111,8 @@ class NewFriendViewController: UIViewController, UINavigationControllerDelegate,
                     return 15
                 case 4:
                     return 30
+                case 5:
+                    return 90
                 default:
                     return 1
                 }
