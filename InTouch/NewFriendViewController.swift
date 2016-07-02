@@ -79,16 +79,17 @@ class NewFriendViewController: UIViewController, UINavigationControllerDelegate,
     // MARK: - Navigation
     
     func addExistingContact() {
-        let contactPicker = CNContactPickerViewController()
-        contactPicker.delegate = self
-        self.presentViewController(contactPicker, animated: true, completion: nil)
+        AppDelegate.getAppDelegate().requestForAccess { (accessGranted) -> Void in
+            if accessGranted {
+                let contactPicker = CNContactPickerViewController()
+                contactPicker.delegate = self
+                self.presentViewController(contactPicker, animated: true, completion: nil)
+            }
+        }
     }
     
     func contactPicker(picker: CNContactPickerViewController, didSelectContact contact: CNContact) {
         nameTextField.text = contact.givenName + " " + contact.familyName
-        
-        // TODO: - Figure out how to find the main phone number and link to button on main screen
-        //friend?.phoneNumber = contact.phoneNumbers.indexOf(CNLabelPhoneNumberMain)
         
         self.contact = contact
         

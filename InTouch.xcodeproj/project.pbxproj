@@ -113,8 +113,8 @@
 		C982AC661D10DD9F00FB8C91 /* InTouch */ = {
 			isa = PBXGroup;
 			children = (
-				C954EC3D1D1F8FED00ABCF5D /* SampleContact.swift */,
 				C982AC671D10DD9F00FB8C91 /* AppDelegate.swift */,
+				C954EC3D1D1F8FED00ABCF5D /* SampleContact.swift */,
 				C982AC951D10DDD700FB8C91 /* FriendTableViewCell.swift */,
 				C982AC9B1D10F21000FB8C91 /* Friend.swift */,
 				C982AC991D10E1DF00FB8C91 /* FriendTableViewController.swift */,

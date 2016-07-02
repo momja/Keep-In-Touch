@@ -88,16 +88,21 @@ class Friend: NSObject, NSCoding {
     // MARK: - CNContact
     
     func getContact() -> CNContact? {
-        let store = CNContactStore()
-        do {
-            let contact: CNContact = try store.unifiedContactWithIdentifier(self.identifier, keysToFetch: [CNContactFormatter.descriptorForRequiredKeysForStyle(.FullName), CNContactImageDataKey, CNContactPhoneNumbersKey])
-            print("fetching ", contact.givenName, " contact")
-            return contact
+        var contact: CNContact?
+        AppDelegate.getAppDelegate().requestForAccess { (accessGranted) -> Void in
+            if accessGranted {
+                let store = AppDelegate.getAppDelegate().contactStore
+                do {
+                    contact = try store.unifiedContactWithIdentifier(self.identifier, keysToFetch: [CNContactFormatter.descriptorForRequiredKeysForStyle(.FullName), CNContactImageDataKey, CNContactPhoneNumbersKey])
+                    print("fetching ", contact!.givenName, " contact")
+                }
+                catch {
+                    print("contact is missing information")
+                    contact = nil
+                }
+            }
         }
-        catch {
-            print("contact is missing information")
-            return nil
-        }
+        return contact
     }
     
     // MARK: - Date Handling

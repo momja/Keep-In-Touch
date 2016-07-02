@@ -29,13 +29,18 @@ class FriendTableViewController: UITableViewController, UIGestureRecognizerDeleg
         
         // Load any saved friends, otherwise, load sample data.
         
-        if let savedFriends = loadFriends() {
-            friends += savedFriends
-        }
         
-        else {
-            //Load sample data if there is no saved data.
-            loadSampleFriends()
+        AppDelegate.getAppDelegate().requestForAccess { (accessGranted) -> Void in
+            if accessGranted {
+                if let savedFriends = self.loadFriends() {
+                    self.friends += savedFriends
+                }
+                    
+                else {
+                    //Load sample data if there is no saved data.
+                    self.loadSampleFriends()
+                }
+            }
         }
         
     }
