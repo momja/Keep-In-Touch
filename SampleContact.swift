@@ -35,12 +35,6 @@ class SampleContact: CNMutableContact {
         birthday.month = 4
         birthday.year = 1988  // You can omit the year value for a yearless birthday
         self.birthday = birthday
-        
-        // Saving the newly created contact
-        let store = CNContactStore()
-        let saveRequest = CNSaveRequest()
-        saveRequest.addContact(self, toContainerWithIdentifier:nil)
-        try! store.executeSaveRequest(saveRequest)
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -28,18 +28,16 @@ class FriendTableViewController: UITableViewController, UIGestureRecognizerDeleg
         self.tableView.addGestureRecognizer(gesture)
         
         // Load any saved friends, otherwise, load sample data.
-        
-        
         AppDelegate.getAppDelegate().requestForAccess { (accessGranted) -> Void in
             if accessGranted {
                 if let savedFriends = self.loadFriends() {
                     self.friends += savedFriends
                 }
-                    
-                else {
-                    //Load sample data if there is no saved data.
-                    self.loadSampleFriends()
-                }
+            }
+            else {
+                print("cannot access contacts. Using sample contacts")
+                //Load sample data if there is no saved data.
+                self.loadSampleFriends()
             }
         }
         
@@ -80,7 +78,13 @@ class FriendTableViewController: UITableViewController, UIGestureRecognizerDeleg
         
         let friend = friends[indexPath.row]
         
-        cell.nameLabel.text = friend.contact?.givenName
+        if let lastName = friend.contact?.familyName {
+            cell.nameLabel.text = (friend.contact?.givenName)! + " " + lastName
+        }
+        else {
+            cell.nameLabel.text = friend.contact?.givenName
+        }
+        
         cell.warningImageView.image = friend.photo
         if let imageData = friend.contact?.imageData {
             cell.contactImage.image = UIImage(data: imageData)

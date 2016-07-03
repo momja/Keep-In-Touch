@@ -20,7 +20,7 @@ class FriendTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         nameLabel.adjustsFontSizeToFitWidth = true
-        contactImage.layer.cornerRadius = 40
+        contactImage.layer.cornerRadius = contactImage.layer.frame.width/2
         contactImage.layer.masksToBounds = true
         contactImage.layer.borderWidth = 0
     }
