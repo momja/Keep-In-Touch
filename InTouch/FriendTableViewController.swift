@@ -22,6 +22,8 @@ class FriendTableViewController: UITableViewController, UIGestureRecognizerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.tableView.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
+        
         // Make a long press gesture to recognize edits.
         let gesture = UILongPressGestureRecognizer(target: self, action: #selector(self.longTap))
         gesture.minimumPressDuration = 0.2
@@ -55,12 +57,6 @@ class FriendTableViewController: UITableViewController, UIGestureRecognizerDeleg
         // Dispose of any resources that can be recreated.
     }
     
-    // MARK: - Image Configuration
-    
-    func changeImage(cell: FriendTableViewCell, friend: Friend) {
-        cell.warningImageView.image = friend.photo
-    }
-    
     // MARK: - Table view data source
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -79,20 +75,20 @@ class FriendTableViewController: UITableViewController, UIGestureRecognizerDeleg
         let friend = friends[indexPath.row]
         
         if let lastName = friend.contact?.familyName {
-            cell.nameLabel.text = (friend.contact?.givenName)! + " " + lastName
+            print(Array(arrayLiteral: lastName)[0])
+            cell.nameLabel.text = (friend.contact?.givenName)! + " " + String(Array(lastName.characters)[0]) + "."
         }
         else {
             cell.nameLabel.text = friend.contact?.givenName
         }
         
-        cell.warningImageView.image = friend.photo
         if let imageData = friend.contact?.imageData {
             cell.contactImage.image = UIImage(data: imageData)
         }
         else {
             cell.contactImage.image = UIImage(named: "Default_Contact_Photo")
         }
-        cell.backgroundColor = friend.color
+        // TODO: Change colors
         cell.messageButton.tag = indexPath.row
         cell.messageButton.addTarget(self, action: #selector(self.didClickMessage), forControlEvents: UIControlEvents.TouchUpInside)
 
@@ -130,8 +126,7 @@ class FriendTableViewController: UITableViewController, UIGestureRecognizerDeleg
         let friend = self.friends[indexPath.row]
         friend.updateLastContact()
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! FriendTableViewCell
-        cell.backgroundColor = friend.color
-        self.changeImage(cell, friend: self.friends[indexPath.row])
+        // TODO: - Color
     }
     
     // MARK: - Navigation

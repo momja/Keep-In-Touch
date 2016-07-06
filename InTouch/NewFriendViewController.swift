@@ -49,6 +49,10 @@ class NewFriendViewController: UIViewController, UINavigationControllerDelegate,
             segmentedControl.selectedSegmentIndex = friend.frequency
         }
         
+        else {
+            addExistingContact()
+        }
+        
         checkValidFriendName()
         
     }
@@ -73,8 +77,6 @@ class NewFriendViewController: UIViewController, UINavigationControllerDelegate,
     func textFieldDidEndEditing(textField: UITextField) {
         checkValidFriendName()
     }
-    
-    
     
     // MARK: - Navigation
     

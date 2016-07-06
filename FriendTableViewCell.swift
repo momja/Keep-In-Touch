@@ -12,9 +12,9 @@ class FriendTableViewCell: UITableViewCell {
     
     // MARK: Properties
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var warningImageView: UIImageView!
     @IBOutlet weak var messageButton: UIButton!
     @IBOutlet weak var contactImage: UIImageView!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,6 +23,7 @@ class FriendTableViewCell: UITableViewCell {
         contactImage.layer.cornerRadius = contactImage.layer.frame.width/2
         contactImage.layer.masksToBounds = true
         contactImage.layer.borderWidth = 0
+        self.backgroundColor = UIColor.clearColor()
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

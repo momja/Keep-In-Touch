@@ -17,16 +17,10 @@ class Friend: NSObject, NSCoding {
     var frequency: Int
     var dateTime: NSDate
     
-    var photo: UIImage
     var color: UIColor
     
     var contact : CNContact?
     var phoneNumber: CNPhoneNumber?
-    
-    // TODO: - Finalize three warning images
-    let warning1: UIImage = UIImage(named: "Heart")!
-    let warning2: UIImage = UIImage(named: "Ghost")!
-    
     
     struct Color {
         // #329F5B
@@ -54,10 +48,10 @@ class Friend: NSObject, NSCoding {
     // MARK: - Initialization
     
     init?(dateTime: NSDate, frequency: Int, identifier: String) {
+        
         // Initialize stored properties.
         self.dateTime = dateTime
         self.frequency = frequency
-        self.photo = warning2
         
         self.color = UIColor(red: 0, green: 0, blue: 0, alpha: 0)
         
@@ -114,17 +108,14 @@ class Friend: NSObject, NSCoding {
         print(difference)
         if (-difference < Double(frequency*86400)) {
             print("You have seen \(self.contact?.givenName) fairly recently")
-            self.photo = warning1
             self.color = Color.green
         }
         else if (-difference < Double(frequency*2*86400)) {
             print("It's been a while since you last saw \(self.contact?.givenName), maybe you should give him a visit")
-            self.photo = warning2
             self.color = Color.yellow
         }
         else {
             print("You need to visit your friend \(self.contact?.givenName)")
-            self.photo = warning2
             self.color = Color.red
         }
     }
